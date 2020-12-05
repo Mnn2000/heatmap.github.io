@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>mobike15-16pm.heat demo</title>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <style>
+        #map {
+            width: 1200px;
+            height: 750px;
+        }
+
+        body {
+            font: 16px/1.4 "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .ghbtns {
+            position: relative;
+            top: 4px;
+            margin-left: 5px;
+        }
+
+        a {
+            color: #0077ff;
+        }
+    </style>
+</head>
+
+<body>
+
+        <!-- 载入D3库 -->
+        <script src="d3.v3.min.js"></script>
+
+
+    <div id="map"></div>
+
+    <!-- <script src="../node_modules/simpleheat/simpleheat.js"></script>
+<script src="../src/HeatLayer.js"></script>
+ -->
+    <script src="../dist/leaflet-heat.js"></script>
+
+    <script src="http://leaflet.github.io/Leaflet.markercluster/example/realworld.388.js"></script>
+    <script>
+
+        var map = L.map('map').setView([31.1, 121.35], 10);
+
+        var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
+
+       d = [];
+
+            // 练习1文件操作示例代码
+            d3.csv("mobike_15to16_count.csv", function (data) {
+                //此文件载入操作是异步，以下代码在文件完全载入后触发
+                console.log(data);
+                console.log(data[0]["aqi"]);
+                for (var i = 0; i < data.length; i++) {
+                    d[i] = [Number(data[i]['distY']), Number(data[i]['distX']), Number(data[i]['count']*10)];
+                }
+        console.log(d[0]);
+             
+        
+
+        var heat = L.heatLayer(d, { radius: 8 }).addTo(map);
+        
+            
+
+        /*map.on({
+            movestart: function () { draw = false; },
+            moveend: function () { draw = true; },
+            mousemove: function (e) {
+                if (draw) {
+                    heat.addLatLng(e.latlng);
+                }
+            }
+        })*/
+     });
+
+    </script>
+</body>
+
+</html>
